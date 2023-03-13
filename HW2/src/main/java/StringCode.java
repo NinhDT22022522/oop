@@ -12,7 +12,25 @@ public class StringCode {
 	 * @return max run length
 	 */
 	public static int maxRun(String str) {
-		return 0; // YOUR CODE HERE
+		int res = 1;
+		int cnt = 1;
+		StringBuilder s = new StringBuilder();
+		s.append(str);
+		int len = s.length();
+		if (len == 0){
+			return 0;
+		}
+		else {
+			for (int i = 0; i < len - 1; i++) {
+				if (s.charAt(i) == s.charAt(i + 1)) {
+					cnt = cnt + 1;
+					res = (cnt > res) ? cnt : res;
+				} else {
+					cnt = 1;
+				}
+			}
+			return res;
+		}
 	}
 
 	
@@ -24,7 +42,26 @@ public class StringCode {
 	 * @return blown up string
 	 */
 	public static String blowup(String str) {
-		return null; // YOUR CODE HERE
+		StringBuilder s = new StringBuilder();
+		s.append(str);
+		int len = s.length();
+		String res = "";
+		if (len == 0){
+			return res;
+		}else{
+			for (int i = 0; i < len - 1; i++){
+				if (s.charAt(i) <= '9' && s.charAt(i) >= '0'){
+					int cnt = s.charAt(i) - '0';
+					for (int j = 0; j < cnt; j++){
+						res += s.charAt(i + 1);
+					}
+				}else{
+					res = res + s.charAt(i);
+				}
+			}
+			if (!(s.charAt(len - 1) <= '9' && s.charAt(len - 1) >= '0')) res += s.charAt(len - 1);
+			return res;
+		}
 	}
 	
 	/**
