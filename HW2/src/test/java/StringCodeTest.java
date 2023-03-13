@@ -4,7 +4,7 @@
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class StringCodeTest {
 
@@ -84,5 +84,12 @@ public class StringCodeTest {
 	}
 
 	// Need test cases for stringIntersect
+	//
+	//stringInteger
+	//
+	@Test
+	public void testStringInteger_BasicCases(){
+		assertFalse(StringCode.stringIntersect("Ronaldo", "Messi", 2));
+	}
 	
 }
