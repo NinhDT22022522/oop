@@ -12,8 +12,8 @@ public class TetrisGridTest {
 	public void testClear1() {
 		boolean[][] before =
 		{	
-			{true, true, false, },
-			{false, true, true, }
+			{true, true, false },
+			{false, true, true }
 		};
 		
 		boolean[][] after =
@@ -27,5 +27,24 @@ public class TetrisGridTest {
 
 		assertTrue( Arrays.deepEquals(after, tetris.getGrid()) );
 	}
-	
+
+	@Test
+	public void testClear2() {
+		boolean[][] before =
+				{
+						{true, true, false, true, true },
+						{false, true, true, false, true }
+				};
+
+		boolean[][] after =
+				{
+						{true, false, true, false, false},
+						{false, true, false, false, false}
+				};
+
+		TetrisGrid tetris = new TetrisGrid(before);
+		tetris.clearRows();
+
+		assertTrue( Arrays.deepEquals(after, tetris.getGrid()) );
+	}
 }
