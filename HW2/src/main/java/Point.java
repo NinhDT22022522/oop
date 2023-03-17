@@ -3,7 +3,7 @@
 // Could also use the java.awt.Point2D class, but its
 // interface is more messy.
 
-public class Point {
+public class  Point {
 	private double x;
 	private double y;
 	

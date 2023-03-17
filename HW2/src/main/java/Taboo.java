@@ -9,12 +9,14 @@
 import java.util.*;
 
 public class Taboo<T> {
+	private List<T> rules;
 	
 	/**
 	 * Constructs a new Taboo using the given rules (see handout.)
 	 * @param rules rules for new Taboo
 	 */
 	public Taboo(List<T> rules) {
+		this.rules = rules;
 	}
 	
 	/**
@@ -24,7 +26,18 @@ public class Taboo<T> {
 	 * @return elements which should not follow the given element
 	 */
 	public Set<T> noFollow(T elem) {
-		 return null; // YOUR CODE HERE
+		Set<T> res = new HashSet<>();
+		Iterator<T> it = rules.listIterator();
+		while (it.hasNext()){
+			T tmp = it.next();
+			if (tmp != null && tmp.equals(elem) && it.hasNext() ){
+				T u = it.next();
+				if (u != null){
+					res.add(u);
+				}
+			}
+		}
+		return res;
 	}
 	
 	/**
@@ -33,5 +46,12 @@ public class Taboo<T> {
 	 * @param list collection to reduce
 	 */
 	public void reduce(List<T> list) {
+		for (int i = 0; i < list.size() - 1; i++) {
+			Set<T> noFollowList = noFollow(list.get(i));
+			while (i < list.size() - 1 && noFollowList.contains(list.get(i + 1))) {
+				list.remove(i + 1);
+			}
+		}
+
 	}
 }
