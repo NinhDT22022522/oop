@@ -32,18 +32,18 @@ public class TabooTest {
 
     @Test
     public void testTaboo2() {
-        List<String> rules = new ArrayList<String>();
+        List<String> rules = new ArrayList<>();
         rules.add("a");
         rules.add("b");
         rules.add(null);
         rules.add("c");
         rules.add("d");
 
-        Taboo<String> t = new Taboo<String>(rules);
+        Taboo<String> t = new Taboo<>(rules);
 
-        Set<String> s1 = new HashSet<String>();
-        Set<String> s2 = new HashSet<String>();
-        Set<String> s3 = new HashSet<String>();
+        Set<String> s1 = new HashSet<>();
+        Set<String> s2 = new HashSet<>();
+        Set<String> s3 = new HashSet<>();
 
         s1.add("b");
         s3.add("d");
@@ -57,13 +57,13 @@ public class TabooTest {
     @Test
     public void testTaboo3() {
         List<String> rules = stringToList("acbxcxa");
-        Taboo<String> t = new Taboo<String>(rules);
+        Taboo<String> t = new Taboo<>(rules);
 
-        Set<String> s1 = new HashSet<String>();
-        Set<String> s2 = new HashSet<String>();
-        Set<String> s3 = new HashSet<String>();
-        Set<String> s4 = new HashSet<String>();
-        Set<String> s5 = new HashSet<String>();
+        Set<String> s1 = new HashSet<>();
+        Set<String> s2 = new HashSet<>();
+        Set<String> s3 = new HashSet<>();
+        Set<String> s4 = new HashSet<>();
+        Set<String> s5 = new HashSet<>();
 
         s1.add("c");
         s2.add("b");
@@ -82,14 +82,14 @@ public class TabooTest {
     @Test
     public void testTaboo4() {
         List<String> rules = stringToList("acab");
-        Taboo<String> t = new Taboo<String>(rules);
+        Taboo<String> t = new Taboo<>(rules);
 
         // reduce the set
         List<String> set = stringToList("acbxca");
         t.reduce(set);
 
         // generate the "answer"
-        List<String> s1 = new ArrayList<String>();
+        List<String> s1 = new ArrayList<>();
         s1.add("a");
         s1.add("x");
         s1.add("c");
@@ -100,19 +100,19 @@ public class TabooTest {
 
     @Test
     public void testTaboo5() {
-        List<String> rules = new ArrayList<String>();
+        List<String> rules = new ArrayList<>();
         rules.add("a");
         rules.add("b");
         rules.add(null);
         rules.add("c");
         rules.add("d");
 
-        Taboo<String> t = new Taboo<String>(rules);
+        Taboo<String> t = new Taboo<>(rules);
 
         // reduce the set
         List<String> set1 = stringToList("acbxca");
 
-        List<String> answer1 = new ArrayList<String>();
+        List<String> answer1 = new ArrayList<>();
         answer1.add("a");
         answer1.add("c");
         answer1.add("b");
@@ -120,7 +120,7 @@ public class TabooTest {
         answer1.add("c");
         answer1.add("a");
 
-        // first set is not impacted by tis reduction
+
         t.reduce(set1);
         assertTrue(Arrays.deepEquals(set1.toArray(), answer1.toArray()));
 
@@ -128,7 +128,7 @@ public class TabooTest {
         List<String> set2 = stringToList("abcd");
         t.reduce(set2);
 
-        List<String> answer2 = new ArrayList<String>();
+        List<String> answer2 = new ArrayList<>();
         answer2.add("a");
         answer2.add("c");
         assertTrue(Arrays.deepEquals(set2.toArray(), answer2.toArray()));
@@ -137,7 +137,7 @@ public class TabooTest {
         List<String> set3 = stringToList("abbbcddda");
         t.reduce(set3);
 
-        List<String> answer3 = new ArrayList<String>();
+        List<String> answer3 = new ArrayList<>();
         answer3.add("a");
         answer3.add("c");
         answer3.add("a");
@@ -152,7 +152,7 @@ public class TabooTest {
         // 4 may not follow 2
         // 5 may not follow 4
         List<Integer> rules = intToList("1245");
-        Taboo<Integer> t = new Taboo<Integer>(rules);
+        Taboo<Integer> t = new Taboo<>(rules);
 
         Set<Integer> response1 = t.noFollow(1);
         Set<Integer> response2 = t.noFollow(2);
@@ -160,12 +160,12 @@ public class TabooTest {
         Set<Integer> response4 = t.noFollow(4);
         Set<Integer> response5 = t.noFollow(5);
 
-        Set<Integer> answer1 = new HashSet<Integer>();
+        Set<Integer> answer1 = new HashSet<>();
         answer1.add(2);
-        Set<Integer> answer2 = new HashSet<Integer>();
+        Set<Integer> answer2 = new HashSet<>();
         answer2.add(4);
-        Set<Integer> answer3 = new HashSet<Integer>();
-        Set<Integer> answer4 = new HashSet<Integer>();
+        Set<Integer> answer3 = new HashSet<>();
+        Set<Integer> answer4 = new HashSet<>();
         answer4.add(5);
 
         assertTrue(Arrays.deepEquals(answer1.toArray(), response1.toArray()));
@@ -178,16 +178,16 @@ public class TabooTest {
     @Test
     public void testTaboo7() {
         List<Integer> rules = intToList("1214");
-        Taboo<Integer> t = new Taboo<Integer>(rules);
+        Taboo<Integer> t = new Taboo<>(rules);
 
         Set<Integer> response1 = t.noFollow(1);
         Set<Integer> response2 = t.noFollow(2);
         Set<Integer> response3 = t.noFollow(4);
         Set<Integer> response4 = t.noFollow(100);
 
-        List<Integer> answer1 = new ArrayList<Integer>();
-        List<Integer> answer2 = new ArrayList<Integer>();
-        List<Integer> answer3 = new ArrayList<Integer>();
+        List<Integer> answer1 = new ArrayList<>();
+        List<Integer> answer2 = new ArrayList<>();
+        List<Integer> answer3 = new ArrayList<>();
 
         answer1.add(2);
         answer1.add(4);
@@ -202,14 +202,14 @@ public class TabooTest {
     @Test
     public void testTaboo8() {
         List<Integer> rules = intToList("1214");
-        Taboo<Integer> t = new Taboo<Integer>(rules);
+        Taboo<Integer> t = new Taboo<>(rules);
 
         // 4 may not follow 1
         // 1 may not follow 2
         // hence, list must reduce to "1", "5", "2"
         List<Integer> set = intToList("14521");
 
-        List<Integer> answer = new ArrayList<Integer>();
+        List<Integer> answer = new ArrayList<>();
         answer.add(1);
         answer.add(5);
         answer.add(2);
@@ -220,7 +220,7 @@ public class TabooTest {
     }
 
     private List<String> stringToList(String str) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         for ( int i=0; i < str.length(); ++i ) {
             list.add(String.valueOf(str.charAt(i)));
         }
@@ -228,7 +228,7 @@ public class TabooTest {
     }
 
     private List<Integer> intToList(String str) {
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         for ( int i=0; i < str.length(); ++i ) {
             list.add(Integer.parseInt(str.substring(i,i+1)));
         }
