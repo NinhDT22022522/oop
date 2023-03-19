@@ -88,8 +88,19 @@ public class StringCodeTest {
 	//stringInteger
 	//
 	@Test
-	public void testStringInteger_BasicCases(){
+	public void testStringIntersect_BasicCases(){
 		assertFalse(StringCode.stringIntersect("Ronaldo", "Messi", 2));
+	}
+
+	@Test
+	public void testStringIntersect_BasicCases2(){
+		String s1 = "String Code";
+		String s2 = "CodeBlocks";
+		assertTrue(StringCode.stringIntersect(s1, s2, 1));
+		assertTrue(StringCode.stringIntersect(s1, s2, 2));
+		assertTrue(StringCode.stringIntersect(s1, s2, 3));
+		assertTrue(StringCode.stringIntersect(s1, s2, 4));
+		assertFalse(StringCode.stringIntersect(s1, s2, 5));
 	}
 	
 }

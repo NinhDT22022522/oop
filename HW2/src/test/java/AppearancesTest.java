@@ -32,4 +32,17 @@ public class AppearancesTest {
 	}
 	
 	// Add more tests
+
+	@Test
+	public void testCount1() {
+		List<String> a = stringToList("abbccc");
+		List<String> b = stringToList("cccbba");
+		List<String> c = stringToList("ccbcab");
+		List<String> d = stringToList("bcabcc");
+
+		assertEquals( 3, Appearances.sameCount(a, b));
+		assertEquals( 3, Appearances.sameCount(a, c));
+		assertEquals( 3, Appearances.sameCount(c, b));
+		assertEquals( 3, Appearances.sameCount(d, b));
+	}
 }

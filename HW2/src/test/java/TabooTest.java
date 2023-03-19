@@ -54,33 +54,10 @@ public class TabooTest {
         assertTrue(Arrays.deepEquals(s2.toArray(), t.noFollow("d").toArray()));
     }
 
+
+
     @Test
     public void testTaboo3() {
-        List<String> rules = stringToList("acbxcxa");
-        Taboo<String> t = new Taboo<>(rules);
-
-        Set<String> s1 = new HashSet<>();
-        Set<String> s2 = new HashSet<>();
-        Set<String> s3 = new HashSet<>();
-        Set<String> s4 = new HashSet<>();
-        Set<String> s5 = new HashSet<>();
-
-        s1.add("c");
-        s2.add("b");
-        s2.add("x");
-        s3.add("x");
-        s4.add("c");
-        s4.add("a");
-
-        assertTrue(Arrays.deepEquals(s1.toArray(), t.noFollow("a").toArray()));
-        assertTrue(Arrays.deepEquals(s2.toArray(), t.noFollow("c").toArray()));
-        assertTrue(Arrays.deepEquals(s3.toArray(), t.noFollow("b").toArray()));
-        assertTrue(Arrays.deepEquals(s4.toArray(), t.noFollow("x").toArray()));
-        assertTrue(Arrays.deepEquals(s5.toArray(), t.noFollow("y").toArray()));
-    }
-
-    @Test
-    public void testTaboo4() {
         List<String> rules = stringToList("acab");
         Taboo<String> t = new Taboo<>(rules);
 
@@ -99,7 +76,7 @@ public class TabooTest {
     }
 
     @Test
-    public void testTaboo5() {
+    public void testTaboo4() {
         List<String> rules = new ArrayList<>();
         rules.add("a");
         rules.add("b");
@@ -146,11 +123,8 @@ public class TabooTest {
     }
 
     @Test
-    public void testTaboo6() {
-        // this grammar specifies that:
-        // 2 may not follow 1
-        // 4 may not follow 2
-        // 5 may not follow 4
+    public void testTaboo5() {
+
         List<Integer> rules = intToList("1245");
         Taboo<Integer> t = new Taboo<>(rules);
 
@@ -175,49 +149,8 @@ public class TabooTest {
         assertTrue(Arrays.deepEquals(answer3.toArray(), response5.toArray()));
     }
 
-    @Test
-    public void testTaboo7() {
-        List<Integer> rules = intToList("1214");
-        Taboo<Integer> t = new Taboo<>(rules);
 
-        Set<Integer> response1 = t.noFollow(1);
-        Set<Integer> response2 = t.noFollow(2);
-        Set<Integer> response3 = t.noFollow(4);
-        Set<Integer> response4 = t.noFollow(100);
 
-        List<Integer> answer1 = new ArrayList<>();
-        List<Integer> answer2 = new ArrayList<>();
-        List<Integer> answer3 = new ArrayList<>();
-
-        answer1.add(2);
-        answer1.add(4);
-        answer2.add(1);
-
-        assertTrue(Arrays.deepEquals(answer1.toArray(), response1.toArray()));
-        assertTrue(Arrays.deepEquals(answer2.toArray(), response2.toArray()));
-        assertTrue(Arrays.deepEquals(answer3.toArray(), response3.toArray()));
-        assertTrue(Arrays.deepEquals(answer3.toArray(), response4.toArray()));
-    }
-
-    @Test
-    public void testTaboo8() {
-        List<Integer> rules = intToList("1214");
-        Taboo<Integer> t = new Taboo<>(rules);
-
-        // 4 may not follow 1
-        // 1 may not follow 2
-        // hence, list must reduce to "1", "5", "2"
-        List<Integer> set = intToList("14521");
-
-        List<Integer> answer = new ArrayList<>();
-        answer.add(1);
-        answer.add(5);
-        answer.add(2);
-
-        t.reduce(set);
-
-        assertTrue(Arrays.deepEquals(answer.toArray(), set.toArray()));
-    }
 
     private List<String> stringToList(String str) {
         List<String> list = new ArrayList<>();

@@ -31,6 +31,23 @@ public class CharGridTest {
 		assertEquals(3, cg.charArea('b'));
 		assertEquals(1, cg.charArea('c'));
 	}
+
+	@Test
+	public void testGridArea3() {
+		char[][] grid = new char[][] {
+				{ 'c', 'a', 'x' },
+				{ 'b', ' ', 'b' },
+				{ ' ', ' ', 'a' }
+		};
+		CharGrid cg = new CharGrid(grid);
+
+		assertEquals(6, cg.charArea('a'));
+		assertEquals(3, cg.charArea('b'));
+		assertEquals(1, cg.charArea('c'));
+		assertEquals(0, cg.charArea('d'));
+		assertEquals(1, cg.charArea('x'));
+		assertEquals(4, cg.charArea(' '));
+	}
 	
 	//countPlus
 
@@ -46,9 +63,21 @@ public class CharGridTest {
 				{' ', ' ', 'x', 'x', ' ', 'y', ' ', ' ', ' '}
 		};
 
-		CharGrid cg = new CharGrid(grid);
+		char[][] grid2 = new char[][] {
+				{ ' ', 't', ' ', 'x', ' ', ' ', ' '},
+				{ 't', 't', 't', 'x', ' ', ' ', ' '},
+				{ ' ', 't', ' ', 'x', ' ', ' ', ' '},
+				{ 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
+				{ ' ', ' ', ' ', 'x', ' ', ' ', ' '},
+				{ ' ', ' ', ' ', 'x', ' ', 'x', ' '},
+				{ ' ', ' ', ' ', 'x', ' ', ' ', ' '}
+		};
 
-		assertEquals(2,cg.countPlus());
+		CharGrid cg1 = new CharGrid(grid);
+		CharGrid cg2 = new CharGrid(grid2);
+
+		assertEquals(2,cg1.countPlus());
+		assertEquals(2,cg1.countPlus());
 	}
 	
 	
