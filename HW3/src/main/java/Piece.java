@@ -35,6 +35,7 @@ public class Piece {
      */
     public Piece(TPoint[] points) {
         // YOUR CODE HERE
+        this.body = points;
     }
 
 
