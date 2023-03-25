@@ -35,26 +35,31 @@ public class Piece {
      */
     public Piece(TPoint[] points) {
         // YOUR CODE HERE
-        this.body = points;
-        int maxX = 0, maxY = 0;
-        for (TPoint tPoint : points){
-            maxX = Math.max(tPoint.x, maxX);
-            maxY = Math.max(tPoint.y, maxY);
-        }
-        this.height = maxY + 1;
-        this.width = maxX + 1;
-        int[] skirt = new int[width];
-        for(int i = 0; i < width; i++){
-            skirt[i] = 3;
-        }
-        for (int i = 0; i < width; i++){
-            for (TPoint tPoint : points){
-                if (tPoint.x == i && skirt[i] > tPoint.x){
-                    skirt[i] = tPoint.x;
+        body = points;
+        for (int i = 0; i < body.length; i++){
+            for (int j = i + 1; j < body.length; j++){
+                if (body[i].x > body[j].x){
+                    TPoint tmp = body[i];
+                    body[i] = body[j];
+                    body[j] = tmp;
                 }
+                else if (body[i].x == body[j].x)
+                    if (body[i].y > body[j].y) {
+                        TPoint tmp = body[i];
+                        body[i] = body[j];
+                        body[j] = tmp;
+                    }
             }
         }
-        this.skirt = skirt;
+        height = 1; width = 1;
+        for (TPoint tPoint : body){
+            width = Math.max(tPoint.x + 1, width);
+            height = Math.max(tPoint.y + 1, height);
+        }
+
+        skirt = new int[width];
+        Arrays.fill(skirt, height);
+        for (TPoint tPoint : body) skirt[tPoint.x] = Math.min(skirt[tPoint.x], tPoint.y);
     }
 
 
@@ -106,14 +111,11 @@ public class Piece {
      */
     public Piece computeNextRotation() {
         // YOUR CODE HERE
-        Piece[] newPiece = new Piece[this.body.length];
-        for (int i = this.height - 1; i >= 0; i--){
-            for (int j = 0; j < this.width; j++){
-
-            }
+        TPoint[] next = new TPoint[body.length];
+        for (int i = 0; i < body.length; i++){
+            next[i] = new TPoint(height - 1 - body[i].y, body[i].x);
         }
-
-        return null; // YOUR CODE HERE
+        return new Piece(next); // YOUR CODE HERE
     }
 
     /**
@@ -145,6 +147,11 @@ public class Piece {
         Piece other = (Piece) obj;
 
         // YOUR CODE HERE
+        for (int i = 0; i < body.length; i++){
+            if (body[i] != other.body[i]){
+                return false;
+            }
+        }
         return true;
     }
 
@@ -210,6 +217,7 @@ public class Piece {
 	*/
     private static Piece makeFastRotations(Piece root) {
         // YOUR CODE HERE
+
         return null; // YOUR CODE HERE
     }
 

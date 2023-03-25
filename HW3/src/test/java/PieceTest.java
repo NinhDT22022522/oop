@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /*
   Unit test for Piece class -- starter shell.

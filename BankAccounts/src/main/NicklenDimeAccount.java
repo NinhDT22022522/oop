@@ -1,4 +1,6 @@
-public class NicklenDimeAccount extends BankAccount{
+package main;
+
+public class NicklenDimeAccount extends BankAccount {
     private int withdrawCount;
     public NicklenDimeAccount(double initialBalance){
         super(initialBalance);

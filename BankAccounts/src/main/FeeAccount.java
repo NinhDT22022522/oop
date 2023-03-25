@@ -1,4 +1,6 @@
-public class FeeAccount extends BankAccount{
+package main;
+
+public class FeeAccount extends BankAccount {
     public FeeAccount(double initialBalance){
         super(initialBalance);
     }

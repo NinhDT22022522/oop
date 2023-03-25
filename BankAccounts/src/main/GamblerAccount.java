@@ -1,6 +1,8 @@
+package main;
+
 import java.util.Random;
 
-public class GamblerAccount extends BankAccount{
+public class GamblerAccount extends BankAccount {
     private Random ran = new Random();
     private double charge;
     public GamblerAccount(double initialBalance){
