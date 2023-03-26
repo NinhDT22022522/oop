@@ -111,11 +111,11 @@ public class Piece {
      */
     public Piece computeNextRotation() {
         // YOUR CODE HERE
-        TPoint[] next = new TPoint[body.length];
+        TPoint[] nextRotation = new TPoint[body.length];
         for (int i = 0; i < body.length; i++){
-            next[i] = new TPoint(height - 1 - body[i].y, body[i].x);
+            nextRotation[i] = new TPoint(height - 1 - body[i].y, body[i].x);
         }
-        return new Piece(next); // YOUR CODE HERE
+        return new Piece(nextRotation); // YOUR CODE HERE
     }
 
     /**
@@ -148,7 +148,7 @@ public class Piece {
 
         // YOUR CODE HERE
         for (int i = 0; i < body.length; i++){
-            if (body[i] != other.body[i]){
+            if (!body[i].equals(other.body[i])){
                 return false;
             }
         }
@@ -217,8 +217,16 @@ public class Piece {
 	*/
     private static Piece makeFastRotations(Piece root) {
         // YOUR CODE HERE
-
-        return null; // YOUR CODE HERE
+        Piece pre = root;
+        Piece cur = root.computeNextRotation();
+        root.next = cur;
+        while(!cur.equals(root)){
+            pre = cur;
+            cur.next = cur.computeNextRotation();
+            cur = cur.next;
+        }
+        pre.next = root;
+        return root; // YOUR CODE HERE
     }
 
 
