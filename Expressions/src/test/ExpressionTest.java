@@ -73,3 +73,4 @@ public class ExpressionTest {
         assertEquals("(3^2 * 1)^2", theBigSquare.toString());
     }
 }
+
