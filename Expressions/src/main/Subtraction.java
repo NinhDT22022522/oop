@@ -3,7 +3,7 @@ package main;
 import main.BinaryExpression;
 import main.Expression;
 
-public class Subtraction extends BinaryExpression {
+public class Subtraction implements BinaryExpression {
     private Expression left, right;
     public Subtraction(Expression _left, Expression _right){
         left = _left;

@@ -1,6 +1,6 @@
 package main;
 
-public class Addition extends BinaryExpression {
+public class Addition implements BinaryExpression {
     private Expression left, right;
     public Addition(Expression _left, Expression _right){
         left = _left;

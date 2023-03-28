@@ -3,32 +3,37 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SampleObserver implements ActionListener {
-    private JButton button;
+
+
+public class SampleObserver  {
+    private Ball ball ;
+    private JFrame frameBall;
+    private ControlPanel controlPanel;
+    private JFrame frameControlPanel;
     public void go(){
-        button = new JButton("Start");
-        button.addActionListener(this);
+        ball = new Ball();
+        frameBall = new JFrame();
+        controlPanel = new ControlPanel(ball);
+        frameControlPanel = new JFrame();
+        if (controlPanel.getStatus()){
 
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(BorderLayout.SOUTH, button);
-        frame.setSize(300, 300);
-        frame.setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (button.getText().equals("Start")){
-            button.setText("Stop");
-        }else if (button.getText().equals("Stop")){
-            button.setText("Start");
         }
 
+        frameBall.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameBall.setSize(300, 300);
+        frameBall.getContentPane().add(BorderLayout.CENTER, ball);
+        frameBall.setVisible(true);
+
+        frameControlPanel.getContentPane().add(BorderLayout.NORTH, controlPanel.getLabel());
+        frameControlPanel.getContentPane().add(BorderLayout.SOUTH, controlPanel.getButton());
+        frameControlPanel.setSize(300, 150);
+        frameControlPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameControlPanel.setVisible(true);
     }
+
 
     public static void main(String[] args) {
         SampleObserver obs = new SampleObserver();
         obs.go();
-
     }
 }

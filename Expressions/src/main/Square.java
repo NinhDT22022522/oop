@@ -1,6 +1,6 @@
 package main;
 
-public class Square extends Expression {
+public class Square implements Expression {
     private Expression expression;
     public Square(Expression _expression){
         expression = _expression;

@@ -2,7 +2,7 @@ package main;
 
 import main.Expression;
 
-public class Numeral extends Expression {
+public class Numeral implements Expression {
     private int value;
     public Numeral(int _value){
         value = _value;
