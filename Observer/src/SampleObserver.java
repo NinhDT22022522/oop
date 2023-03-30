@@ -1,20 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 
 
 public class SampleObserver  {
-    private Ball ball ;
-    private JFrame frameBall;
-    private ControlPanel controlPanel;
-    private JFrame frameControlPanel;
     public void go(){
-        ball = new Ball();
-        frameBall = new JFrame();
-        controlPanel = new ControlPanel(ball);
-        frameControlPanel = new JFrame();
+        Ball ball = new Ball();
+        JFrame frameBall = new JFrame();
+        ControlPanel controlPanel = new ControlPanel(ball);
+        JFrame frameControlPanel = new JFrame();
 
 
         frameBall.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

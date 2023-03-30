@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class Ball extends JPanel implements ActionListener {
@@ -12,7 +11,7 @@ public class Ball extends JPanel implements ActionListener {
     private int y = 50;
     private int xSpeed = 2;
     private int ySpeed = 2;
-    private int diameter = 20;
+    private final int diameter = 20;
     private int ballCnt = 0;
     private boolean status;
     private List<BallObserver> observers = new ArrayList<>();
@@ -22,7 +21,7 @@ public class Ball extends JPanel implements ActionListener {
     }
     public void paintComponent(Graphics g){
         g.setColor(Color.BLUE);
-        g.fillOval(x, y, 20, 20);
+        g.fillOval(x, y, diameter, diameter);
     }
 
 
