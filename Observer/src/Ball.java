@@ -4,30 +4,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-interface BallObserver{
-    void update(int ballCnt);
-}
 
 public class Ball extends JPanel implements ActionListener {
-    private int x = 0;
-    private int y = 0;
+    private int x = 70;
+    private int y = 50;
     private int xSpeed = 2;
     private int ySpeed = 2;
     private int diameter = 20;
     private int ballCnt = 0;
+    private boolean status;
     private List<BallObserver> observers = new ArrayList<>();
 
     public Ball(){
-
+        status = false;
     }
     public void paintComponent(Graphics g){
         g.setColor(Color.BLUE);
-        g.fillOval(20, 50, 20, 20);
+        g.fillOval(x, y, 20, 20);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+
+    public void moveBall() {
+
         x += xSpeed;
         y += ySpeed;
         if (x < 0 || x > getWidth() - diameter) {
@@ -40,7 +40,8 @@ public class Ball extends JPanel implements ActionListener {
             ballCnt++;
             notifyObservers();
         }
-        repaint();
+
+
     }
 
     public void notifyObservers() {
@@ -55,5 +56,18 @@ public class Ball extends JPanel implements ActionListener {
 
     public void detach(BallObserver observer){
         observers.remove(observer);
+    }
+
+    public boolean getStatus(){
+        return status;
+    }
+
+    public void setStatus(boolean status){
+        this.status = status;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

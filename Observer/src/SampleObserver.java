@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.concurrent.TimeUnit;
 
 
 public class SampleObserver  {
@@ -15,13 +15,12 @@ public class SampleObserver  {
         frameBall = new JFrame();
         controlPanel = new ControlPanel(ball);
         frameControlPanel = new JFrame();
-        if (controlPanel.getStatus()){
 
-        }
 
         frameBall.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameBall.setSize(300, 300);
         frameBall.getContentPane().add(BorderLayout.CENTER, ball);
+
         frameBall.setVisible(true);
 
         frameControlPanel.getContentPane().add(BorderLayout.NORTH, controlPanel.getLabel());
@@ -29,6 +28,18 @@ public class SampleObserver  {
         frameControlPanel.setSize(300, 150);
         frameControlPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameControlPanel.setVisible(true);
+
+        while(true){
+            if (ball.getStatus()){
+                ball.moveBall();
+                frameBall.repaint();
+            }
+            try {
+                TimeUnit.MILLISECONDS.sleep(10);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

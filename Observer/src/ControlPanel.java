@@ -6,10 +6,10 @@ public class ControlPanel extends JPanel implements BallObserver, ActionListener
     private JLabel label;
     private JButton button;
     private Ball ball;
-    private boolean status ;
+
 
     public ControlPanel(Ball ball){
-        status = true;
+
         label = new JLabel("Bounce 0");
         button = new JButton("Start");
         button.addActionListener(this);
@@ -23,12 +23,19 @@ public class ControlPanel extends JPanel implements BallObserver, ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (status){
+
+        if (!ball.getStatus()){
             button.setText("Stop");
-            status = false;
-        }else if (!status ){
+
+            ball.setStatus(true);
+
+
+        }else if (ball.getStatus()){
             button.setText("Start");
-            status = true;
+
+            ball.setStatus(false);
+
+
         }
     }
 
@@ -40,7 +47,5 @@ public class ControlPanel extends JPanel implements BallObserver, ActionListener
         return button;
     }
 
-    public boolean getStatus(){
-        return status;
-    }
+
 }
