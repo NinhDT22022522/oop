@@ -7,8 +7,8 @@ public class Square implements Expression {
     }
 
     @Override
-    public String toString() {
-        return expression + "^2";
+    public String convertToString() {
+        return expression.convertToString()+ "^2";
     }
 
     @Override

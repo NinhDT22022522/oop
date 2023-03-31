@@ -7,25 +7,33 @@ public class Addition implements BinaryExpression {
         right = _right;
     }
 
-    @Override
-    public Expression left() {
+
+    public Expression getLeft() {
         return left;
     }
 
-    @Override
-    public Expression right() {
+
+    public Expression getRight() {
         return right;
     }
 
     @Override
-    public String toString() {
-        return "(" + left().toString() + " + " +  right().toString() + ")";
+    public String getOperator() {
+        return "+";
     }
+
 
     @Override
     public int evaluate() {
-        return left().evaluate()  + right().evaluate();
+        return left.evaluate()  + right.evaluate();
     }
 
 
+    public static void main(String[] args) {
+        Expression two = new Numeral(2);
+        Expression twoSquare = new Square(two);
+        Expression twoPlusTwoSquare = new Addition(two, twoSquare);
+        System.out.println(twoPlusTwoSquare.convertToString());
+        System.out.println(twoPlusTwoSquare.evaluate());
+    }
 }

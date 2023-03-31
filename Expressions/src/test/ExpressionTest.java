@@ -15,7 +15,7 @@ public class ExpressionTest {
     @Test
     public void testNumeralToString() {
         Expression two = new Numeral(2);
-        assertEquals("2", two.toString());
+        assertEquals("2", two.convertToString());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class ExpressionTest {
     public void testSquareToString() {
         Expression two = new Numeral(2);
         Expression twoSquare = new Square(two);
-        assertEquals("2^2", twoSquare.toString());
+        assertEquals("2^2", twoSquare.convertToString());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ExpressionTest {
         Expression two = new Numeral(2);
         Expression twoSquare = new Square(two);
         Expression twoPlusTwoSquare = new Addition(two, twoSquare);
-        assertEquals("(2 + 2^2)", twoPlusTwoSquare.toString());
+        assertEquals("(2 + 2^2)", twoPlusTwoSquare.convertToString());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ExpressionTest {
         Expression threeSquare = new Square(new Numeral(3));
         Expression threeSquarePlusOne = new Addition(threeSquare, one);
         Expression theBigSquare = new Square(threeSquarePlusOne);
-        assertEquals("(3^2 + 1)^2", theBigSquare.toString());
+        assertEquals("(3^2 + 1)^2", theBigSquare.convertToString());
     }
 
     @Test
@@ -62,7 +62,7 @@ public class ExpressionTest {
         Expression threeSquare = new Square(new Numeral(3));
         Expression threeSquarePlusOne = new Subtraction(threeSquare, one);
         Expression theBigSquare = new Square(threeSquarePlusOne);
-        assertEquals("(3^2 - 1)^2", theBigSquare.toString());
+        assertEquals("(3^2 - 1)^2", theBigSquare.convertToString());
     }
     @Test
     public void testMultiplicationWithParenthesesToString(){
@@ -70,7 +70,7 @@ public class ExpressionTest {
         Expression threeSquare = new Square(new Numeral(3));
         Expression threeSquarePlusOne = new Multiplication(threeSquare, one);
         Expression theBigSquare = new Square(threeSquarePlusOne);
-        assertEquals("(3^2 * 1)^2", theBigSquare.toString());
+        assertEquals("(3^2 * 1)^2", theBigSquare.convertToString());
     }
 }
 

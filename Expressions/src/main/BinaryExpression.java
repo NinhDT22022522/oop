@@ -1,13 +1,10 @@
 package main;
 
 public interface BinaryExpression extends Expression {
-    abstract public Expression left();
-    abstract public Expression right();
-
-
-    @Override
-    abstract public String toString();
-
-    @Override
-    abstract public int evaluate();
+    Expression getLeft();
+    Expression getRight();
+    String getOperator();
+    default String convertToString(){
+        return "(" + getLeft().convertToString() + " " + getOperator() + " " + getRight().convertToString() + ")";
+    }
 }

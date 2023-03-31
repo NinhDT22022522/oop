@@ -11,22 +11,23 @@ public class Subtraction implements BinaryExpression {
     }
 
     @Override
-    public Expression left() {
+    public Expression getLeft() {
         return left;
     }
 
     @Override
-    public Expression right() {
+    public Expression getRight() {
         return right;
     }
 
     @Override
-    public String toString() {
-        return "(" + left().toString() + " - " +  right().toString() + ")";
+    public String getOperator() {
+        return "-";
     }
+
 
     @Override
     public int evaluate() {
-        return left().evaluate() - right().evaluate();
+        return left.evaluate() - right.evaluate();
     }
 }
