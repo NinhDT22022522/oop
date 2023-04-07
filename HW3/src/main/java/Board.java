@@ -92,13 +92,14 @@ public class Board {
                 for (int i = 0; i < width; i++){
                     if(grid[i][j]){
                         yWidths[j]++;
-                        if (j + 1 > yHeights[i]) yHeights[i] = j + 1;
-                        if (yHeights[i] > yMaxHeight) yMaxHeight = yHeights[i];
+                        yHeights[i] = Math.max(j + 1, yHeights[i]);
+                        yMaxHeight = Math.max(yMaxHeight, yHeights[i]);
                     }
                 }
             }
-            if (!Arrays.equals(heights, yHeights) || !Arrays.equals(widths, yWidths) || !(maxHeight == yMaxHeight))
-                throw new RuntimeException("insane board problem");
+            if (!Arrays.equals(heights, yHeights) || !Arrays.equals(widths, yWidths) || !(maxHeight == yMaxHeight)) {
+                throw new RuntimeException("description");
+            }
         }
     }
 
@@ -113,11 +114,11 @@ public class Board {
      */
     public int dropHeight(Piece piece, int x) {
          // YOUR CODE HERE
-        int drop = 0;
+        int y = 0;
         for(int i = 0; i < piece.getWidth(); i++) {
-            drop = Math.max(drop, heights[i+x] - piece.getSkirt()[i]);
+            y = Math.max(y, heights[i+x] - piece.getSkirt()[i]);
         }
-        return drop;
+        return y;
     }
 
 
