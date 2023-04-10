@@ -1,5 +1,7 @@
 import java.util.Arrays;
 
+import static java.util.Arrays.toString;
+
 public class Main {
     public static void main(String[] args) {
         double[] listNum = {2, 4, 5, 6, 3, 1};
