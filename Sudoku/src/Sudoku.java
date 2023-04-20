@@ -1,33 +1,23 @@
-import java.util.Arrays;
+import static java.util.Arrays.copyOf;
 
 public class Sudoku {
     private int[][] board;
+    private SudokuSolver sudokuSolver;
 
-    public Sudoku(int[][] grid) {
+    public Sudoku(int[][] grid, SudokuSolver sudokuSolver) {
         // Create a board from the input grid
         this.board = new int[9][9];
         for (int i = 0; i < 9; i++) {
-            this.board[i] = Arrays.copyOf(grid[i], 9);
+            this.board[i] = copyOf(grid[i], 9);
         }
+        this.sudokuSolver = sudokuSolver;
     }
 
     public boolean solve() {
-        int[] emptyCell = findEmptyCell();
-        if (emptyCell == null) {
-            return true;
+        if (sudokuSolver == null){
+            throw new RuntimeException("Solver is not set");
         }
-        int row = emptyCell[0];
-        int col = emptyCell[1];
-        for (int num = 1; num <= 9; num++) {
-            if (checkValidity(num, row, col)) {
-                board[row][col] = num;
-                if (solve()) {
-                    return true;
-                }
-                board[row][col] = 0;
-            }
-        }
-        return false;
+        else return sudokuSolver.solve(this.getGrid());
     }
 
     public int[][] getGrid() {
@@ -38,75 +28,58 @@ public class Sudoku {
         StringBuilder sb = new StringBuilder();
         for (int[] row : board) {
             for (int num : row) {
-                sb.append(num + " ");
+                sb.append(num).append(" ");
             }
             sb.append("\n");
         }
         return sb.toString();
+
     }
 
-    private int[] findEmptyCell() {
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (board[row][col] == 0) {
-                    return new int[]{row, col};
-                }
-            }
-        }
-        return null;
-    }
 
-    private boolean checkValidity(int num, int row, int col) {
-        // Check row
-        for (int i = 0; i < 9; i++) {
-            if (board[row][i] == num) {
-                return false;
-            }
-        }
-        // Check column
-        for (int i = 0; i < 9; i++) {
-            if (board[i][col] == num) {
-                return false;
-            }
-        }
-        // Check subgrid
-        int subgridRowStart = (row / 3) * 3;
-        int subgridColStart = (col / 3) * 3;
-        for (int i = subgridRowStart; i < subgridRowStart + 3; i++) {
-            for (int j = subgridColStart; j < subgridColStart + 3; j++) {
-                if (board[i][j] == num) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
-    public static int[][] stringsToGrid(String... rows) {
+
+    public static int[][] stringsToGrid(String... rows) throws IllegalAccessException {
+        if (rows.length < 9){
+            throw new IllegalAccessException("Grid does not contain enough rows!!!");
+        }
         int[][] grid = new int[9][9];
         for (int i = 0; i < 9; i++) {
             String[] rowValues = rows[i].trim().split(" ");
+            if (rowValues.length < 9){
+                throw new IllegalAccessException("Row " + i + " does not contain enough values!!!");
+            }
             for (int j = 0; j < 9; j++) {
-                grid[i][j] = Integer.parseInt(rowValues[j]);
+                try {
+                    grid[i][j] = Integer.parseInt(rowValues[j]);
+                }
+                catch(NumberFormatException numberFormatException){
+                    grid[i][j] = 0;
+                }
             }
         }
         return grid;
     }
 
-    public static void main(String[] args) {
+    public void setSolver(SudokuSolver sudokuSolver){
+        this.sudokuSolver = sudokuSolver;
+    }
+
+    public static void main(String[] args) throws IllegalAccessException {
         int[][] grid = stringsToGrid(
-                "3 7 0 0 0 0 0 8 0",
-                "0 0 1 0 9 3 0 0 0",
-                "0 4 0 7 8 0 0 0 3",
-                "0 9 3 8 0 0 0 1 2",
-                "0 0 0 0 4 0 0 0 0",
-                "5 2 0 0 0 6 7 9 0",
-                "6 0 0 0 2 1 0 4 0",
-                "0 0 0 5 3 0 9 0 0",
-                "0 3 0 0 0 0 0 5 1"
+                "1 6 4 0 0 0 0 0 2",
+                "2 0 0 4 0 3 9 1 0",
+                "0 0 5 0 8 0 4 0 7",
+                "0 9 0 0 0 6 5 0 0",
+                "5 0 0 1 0 2 0 0 8",
+                "0 0 8 9 0 0 0 3 0",
+                "8 0 9 0 4 0 2 0 0",
+                "0 7 3 5 0 9 0 0 1",
+                "4 0 0 0 0 0 6 7 9"
         );
-        Sudoku sudoku = new Sudoku(grid);
-        sudoku.solve();
-        System.out.println(sudoku);
+        SudokuSolver sudokuSolver1 = new BackTrackSolver();
+        Sudoku sudoku = new Sudoku(grid, sudokuSolver1);
+        sudoku.setSolver(sudokuSolver1);
+        System.out.println(sudoku.solve());
     }
 }

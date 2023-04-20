@@ -2,7 +2,7 @@ public class QuickSort implements SortAlgo {
     @Override
     public void sort(NumList numList) {
         double[] numbers = numList.getNumList();
-        int len = numList.len();
+        int len = numbers.length;
         quicksort(numbers, 0, len - 1);
     }
 

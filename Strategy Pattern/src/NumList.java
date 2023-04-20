@@ -11,7 +11,11 @@ public class NumList {
         this.listOfNum = listOfNum;
     }
 
-    public int len(){
+    public int add(double number){
+        double[] tmp = new double[listOfNum.length + 1];
+        System.arraycopy(listOfNum, 0, tmp, 0, listOfNum.length);
+        tmp[listOfNum.length] = number;
+        listOfNum = tmp;
         return listOfNum.length;
     }
     public void setBubbleSort(){
